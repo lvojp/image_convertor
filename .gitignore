@@ -1,0 +1,8 @@
+poetry.lock
+.venv/
+.idea/
+.data/
+__pycache__/
+.DS_Store
+*.pyc
+
