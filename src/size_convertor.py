@@ -24,7 +24,7 @@ class SizeConvertor:
         result = cv2.resize(img, dsize=(width, height))
         return result
 
-    def make_dest_path(self, img_path: str, cv2_img: cv2) -> str:
+    def _make_dest_path(self, img_path: str, cv2_img: cv2) -> str:
         org_path_dir = os.path.dirname(img_path)
         org_path_name = os.path.basename(img_path)
         width = cv2_img.shape[1]
@@ -39,7 +39,7 @@ class SizeConvertor:
             resized_cv2_img = self.scale_to_width(cv2_img, width=horizontal_width)
         else:
             resized_cv2_img = self.scale_to_width(cv2_img, width=portrait_width)
-        dest_path = self.make_dest_path(img_path, resized_cv2_img)
+        dest_path = self._make_dest_path(img_path, resized_cv2_img)
         cv2.imwrite(dest_path, resized_cv2_img)
 
 

@@ -1,13 +1,16 @@
 import shutil
 import cv2
-import matplotlib.pyplot as plt
 from src.border_maker import BorderMaker
 
 
-def test_make_white_canvas(tmpdir):
+def test_make_white_canvas():
     bm = BorderMaker()
-    white_img = bm.make_white_canvas(1024)
+    white_img = bm._make_white_canvas(1024)
     assert white_img.shape == (1024, 1024, 3)
+
+def test_get_correct_margin():
+    bm = BorderMaker()
+    bm._get_correct_margin()
 
 
 def test_main(tmpdir):

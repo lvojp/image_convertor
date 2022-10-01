@@ -30,7 +30,7 @@ def test_make_dest_path(tmpdir):
     sc = SizeConvertor()
     img_in_path = f"{tmpdir}/portrait.jpg"
     img_in_cv2 = cv2.imread(img_in_path)
-    result = sc.make_dest_path(img_in_path, img_in_cv2)
+    result = sc._make_dest_path(img_in_path, img_in_cv2)
     assert result == f"{tmpdir}/4000x/portrait.jpg"
 
 
