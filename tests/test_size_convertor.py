@@ -1,40 +1,42 @@
 import cv2
 import shutil
+import matplotlib.pyplot as plt
 from src.size_convertor import SizeConvertor
+
 
 
 def test_is_horizontal():
     sc = SizeConvertor()
-    img = cv2.imread("./assets/size_convertor/input/portrait.jpg")
+    img = cv2.imread("./assets/input/portrait.jpg")
     assert sc.is_horizontal(img) is False
 
-    img = cv2.imread("./assets/size_convertor/input/horizontal.jpg")
+    img = cv2.imread("./assets/input/horizontal.jpg")
     assert sc.is_horizontal(img) is True
 
 
 def test_scale_to_width():
     sc = SizeConvertor()
-    img_in = cv2.imread("./assets/size_convertor/input/portrait.jpg")
+    img_in = cv2.imread("./assets/input/portrait.jpg")
     img_out = sc.scale_to_width(img_in, 1220)
     assert img_out.shape[1] == 1220
 
-    img_in = cv2.imread("./assets/size_convertor/input/horizontal.jpg")
+    img_in = cv2.imread("./assets/input/horizontal.jpg")
     img_out = sc.scale_to_width(img_in, 1440)
     assert img_out.shape[1] == 1440
 
 
-def test_make_dest_path():
+def test_make_dest_path(tmpdir):
+    shutil.copy("./assets/input/portrait.jpg", tmpdir)
     sc = SizeConvertor()
-    img_in_path = "./assets/size_convertor/input/portrait.jpg"
+    img_in_path = f"{tmpdir}/portrait.jpg"
     img_in_cv2 = cv2.imread(img_in_path)
     result = sc.make_dest_path(img_in_path, img_in_cv2)
-    print(result)
-    assert result == "./assets/size_convertor/input/4000x/portrait.jpg"
+    assert result == f"{tmpdir}/4000x/portrait.jpg"
 
 
 def test_main(tmpdir):
-    shutil.copy("./assets/size_convertor/input/portrait.jpg", tmpdir)
-    shutil.copy("./assets/size_convertor/input/horizontal.jpg", tmpdir)
+    shutil.copy("./assets/input/portrait.jpg", tmpdir)
+    shutil.copy("./assets/input/horizontal.jpg", tmpdir)
 
     sc = SizeConvertor()
     sc.main(f"{tmpdir}/portrait.jpg")

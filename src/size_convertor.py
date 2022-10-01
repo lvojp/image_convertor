@@ -16,6 +16,14 @@ class SizeConvertor:
         result = cv2.resize(img, dsize=(width, height))
         return result
 
+    def scale_to_height(self, img: cv2, height: int) -> cv2:
+        """高さが指定した値になるように、アスペクト比を固定して、リサイズする。
+        """
+        h, w = img.shape[:2]
+        width = round(w * (height / h))
+        result = cv2.resize(img, dsize=(width, height))
+        return result
+
     def make_dest_path(self, img_path: str, cv2_img: cv2) -> str:
         org_path_dir = os.path.dirname(img_path)
         org_path_name = os.path.basename(img_path)
