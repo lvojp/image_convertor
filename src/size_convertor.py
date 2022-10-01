@@ -56,7 +56,7 @@ if __name__ == '__main__':
     sc = SizeConvertor()
     available_extends = ["jpg", "jpeg", "png"]
     for ext in available_extends:
-        for img_path in glob.glob(f"{dir_path}/*{ext}"):
+        for img_path in glob.glob(f"{dir_path}/*.{ext}"):
             print('resize:', img_path)
             if hw is not None and pw is not None:
                 sc.main(img_path, horizontal_width=hw, portrait_width=pw)
