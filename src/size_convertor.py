@@ -45,7 +45,7 @@ class SizeConvertor:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='auto resize images, each horizontal image and portrait image.')
-    parser.add_argument('-path', '--img_path_dir', required=True, type=str, help='image path directory')
+    parser.add_argument('-d', '--img_path_dir', required=True, type=str, help='image path directory')
     parser.add_argument('-hw', '--horizontal_width', type=int, help='horizontal image width')
     parser.add_argument('-pw', '--portrait_width', type=int, help='portrait image width')
     args = parser.parse_args()
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     available_extends = ["jpg", "jpeg", "png"]
     for ext in available_extends:
         for img_path in glob.glob(f"{dir_path}/*.{ext}"):
-            print('resize:', img_path)
+            print(f"Processing {img_path}")
             if hw is not None and pw is not None:
                 sc.main(img_path, horizontal_width=hw, portrait_width=pw)
             elif hw is not None:
@@ -66,4 +66,4 @@ if __name__ == '__main__':
                 sc.main(img_path, portrait_width=pw)
             else:
                 sc.main(img_path)
-            print('finish:', img_path)
+            print(f"Done")
