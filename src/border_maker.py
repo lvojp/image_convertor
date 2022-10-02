@@ -6,6 +6,7 @@ import numpy as np
 from src.size_convertor import SizeConvertor
 from typing import Tuple
 
+CANVAS_SIZE = 1500
 
 class BorderMaker:
     def __init__(self):
@@ -28,9 +29,9 @@ class BorderMaker:
 
     def _make_resized_picture(self, img: cv2, border_size: int = 0) -> np.ndarray:
         if self.sc.is_horizontal(img):
-            result = self.sc.scale_to_width(img, 1500 - border_size * 2)
+            result = self.sc.scale_to_width(img, CANVAS_SIZE - border_size * 2)
         else:
-            result = self.sc.scale_to_height(img, 1500 - border_size * 2)
+            result = self.sc.scale_to_height(img, CANVAS_SIZE - border_size * 2)
         return result
 
     def _get_correct_margin(self, canvas: cv2, img: cv2) -> Tuple[int, int]:
@@ -40,7 +41,7 @@ class BorderMaker:
         margin_y = (canvas_height - img_height) // 2
         return margin_x, margin_y
 
-    def main(self, img_path: str, canvas_size: int = 1500, border_size: int = 0):
+    def main(self, img_path: str, canvas_size: int = CANVAS_SIZE, border_size: int = 0):
         try:
             img = cv2.imread(img_path)
             canvas = self._make_white_canvas(canvas_size)

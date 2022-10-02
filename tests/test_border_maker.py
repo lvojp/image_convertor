@@ -5,12 +5,19 @@ from src.border_maker import BorderMaker
 
 def test_make_white_canvas():
     bm = BorderMaker()
-    white_img = bm._make_white_canvas(1024)
-    assert white_img.shape == (1024, 1024, 3)
+    white_img = bm._make_white_canvas(1500)
+    assert white_img.shape == (1500, 1500, 3)
+
 
 def test_get_correct_margin():
     bm = BorderMaker()
-    bm._get_correct_margin()
+    canvas = bm._make_white_canvas(1500)
+    img = cv2.imread("./assets/input/portrait.jpg")
+    resized_img = bm._make_resized_picture(img, 150)
+    x, y = bm._get_correct_margin(canvas, resized_img)
+    assert x == 350
+    assert y == 150
+
 
 
 def test_main(tmpdir):
