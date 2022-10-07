@@ -3,7 +3,7 @@ import os
 import glob
 import argparse
 import numpy as np
-from src.size_convertor import SizeConvertor
+from size_convertor import SizeConvertor
 from typing import Tuple
 
 CANVAS_SIZE = 1500
